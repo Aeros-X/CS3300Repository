@@ -1,8 +1,11 @@
 from django.db import models
 from django.urls import reverse
-
+"""
 # Create models here
-
+class PortfolioProjectManager(models.manager):
+    def get_queryset(self):
+        return super().get_queryset().filter()
+"""
 # Create portfolio model
 class Portfolio(models.Model): 
 
@@ -20,7 +23,7 @@ class Portfolio(models.Model):
     #if you define this method then Django will automatically 
     # add a "View on Site" button to the model's record editing screens in the Admin site 
     def get_absolute_url(self): 
-        return reverse('student-detail', args=[str(self.id)]) 
+        return reverse('portfolio-detail', args=[str(self.id)]) 
 
 # Create project model
 class Project(models.Model): 
@@ -39,7 +42,7 @@ class Project(models.Model):
     #if you define this method then Django will automatically 
     # add a "View on Site" button to the model's record editing screens in the Admin site 
     def get_absolute_url(self): 
-        return reverse('student-detail', args=[str(self.id)]) 
+        return reverse('project-detail', args=[str(self.id)]) 
 
 # Create student model
 class Student(models.Model): 

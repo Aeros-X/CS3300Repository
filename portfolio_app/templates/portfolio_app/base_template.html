@@ -1,74 +1,71 @@
-{% load static %} 
-<!DOCTYPE html> 
-<html lang="en"> 
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark"> <!-- Set the initial theme to "dark" or "light" as desired -->
 
 <head>
-    <title>UCCS CS Students</title> 
-    <meta charset="utf-8" /> 
-    <meta name="viewport" content="width=device-width, initial-scale=1" /> 
-    {% load bootstrap5 %} 
-    {% bootstrap_css %} 
-    {% bootstrap_javascript %} 
+    <title>UCCS CS Students</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/light-mode.css' %}" data-theme="light">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dark-mode.css' %}" data-theme="dark">
+    {% if request.COOKIES.dark_mode == 'enabled' %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/dark-mode.css' %}">
+    {% else %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/light-mode.css' %}">
+    {% endif %}
 </head>
 
- 
- 
-
-<body> 
-
-    <nav class="navbar navbar-expand-lg navbar-light bg-light lead"> 
-    
-    <img src="{% static 'images/uccs_logo.gif' %}" /> 
-    
-    <div class="container-fluid"> 
-    
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" 
-    
-    data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
-    
-    aria-expanded="false" aria-label="Toggle navigation"> 
-    
-    <span class="navbar-toggler-icon"></span></button> 
-    
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup"> 
-    
-    <div class="navbar-nav"> 
-    
-    <a class="nav-link" href="{% url 'index' %}">Home</a> 
-    
-    <a class="nav-link" href="{% url 'students' %}">Students</a> 
-                </div> 
-            </div> 
-        </div> 
-    </nav>  
-    <!-- add block content from html template --> 
-    
-    {% block content %} 
-    {% endblock %}  
-    <li class="nav-item"> 
-        <a class="nav-link" href="{% url 'students' %}">Students</a> 
-    </li> 
-
-    <nav class="navbar navbar-expand-lg bg-body-tertiary"> 
-        <div class="container-fluid"> 
-            <img src="{% static 'images/uccs_logo.gif' %}"> 
-            <button class="navbar-toggler"  type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>  
-            
-            <div class="collapse navbar-collapse" id="navbarNav"> 
-                <ul class="navbar-nav"> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="{% url 'index' %}">Home</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="{% url 'students' %}">Students</a> 
-                    </li> 
-                    <li class="nav-item"> 
-                        <a class="nav-link" href="#">Menu 2</a> 
-        
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <img src="{% static 'images/yuh.gif' %}">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"><span
+                    class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'index' %}">Home</a>
                     </li>
-                </ul> 
-            </div> 
-        </div> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'students' %}">Students</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'portfolios' %}">Portfolios</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'projects' %}">Projects</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
-</body>     
-</html> 
+    
+    <div id="content-container" data-theme="dark">
+        <button id="toggle-dark-mode">Toggle Dark Mode</button>
+        
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <script>
+        const toggleButton = document.getElementById('toggle-dark-mode');
+        const contentContainer = document.getElementById('content-container');
+    
+        toggleButton.addEventListener('click', () => {
+            alert(contentContainer.getAttribute('data-theme'));
+            const currentTheme = contentContainer.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+            // Set the new theme
+            contentContainer.setAttribute('data-theme', newTheme);
+    
+            // Save the user's preference in a cookie
+            document.cookie = `dark_mode=${newTheme}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
+        });
+    </script>
+</body>
+</html>
