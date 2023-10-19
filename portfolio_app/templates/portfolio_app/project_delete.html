@@ -6,7 +6,7 @@
 <p>Are you sure you want to delete {{project.title}} </p>
 <form method="post">
     {% csrf_token %}
-    <input type="submit" value="Delete">
+    <input type="submit" class="btn btn-primary" value="Delete">
 </form>
 <a class="btn btn-primary" href="{{ project.portfolio.get_absolute_url }}" role="button">Cancel</a>
 {%endblock%}
