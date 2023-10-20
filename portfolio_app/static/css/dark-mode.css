@@ -6,7 +6,7 @@
   }
   
   /* Set background and text color for dark mode */
-  body[data-theme="dark"] {
+  body[data-bs-theme="dark"] {
     background-color: #121212; /* Dark background color */
     color: #ffffff; /* Light text color */
   }

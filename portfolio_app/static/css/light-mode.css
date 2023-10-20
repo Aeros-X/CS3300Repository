@@ -6,7 +6,7 @@
 }
 
 /* Set background and text color for light mode */
-body[data-theme="light"] {
+body[data-bs-theme="light"] {
   background-color: #ffffff; /* Light background color */
   color: #333333; /* Dark text color */
 }
@@ -20,7 +20,7 @@ header {
 
 /* Navigation menu styles */
 nav {
-  background-color: #a7a9ab; /* Light navigation background color */
+  background-color: #ffffff; /* Light navigation background color */
 }
 
 nav a {

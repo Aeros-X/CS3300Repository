@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" data-theme="dark"> <!-- Set the initial theme to "dark" or "light" as desired -->
+<html lang="en" data-bs-theme="light"> <!-- Set the initial theme to "dark" or "light" as desired -->
 
 <head>
     <title>UCCS CS Students</title>
@@ -9,8 +9,8 @@
     {% load bootstrap5 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
-    <link rel="stylesheet" type="text/css" href="{% static 'css/light-mode.css' %}" data-theme="light">
-    <link rel="stylesheet" type="text/css" href="{% static 'css/dark-mode.css' %}" data-theme="dark">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/light-mode.css' %}" data-bs-theme="light">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/dark-mode.css' %}" data-bs-theme="dark">
     {% if request.COOKIES.dark_mode == 'enabled' %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/dark-mode.css' %}">
     {% else %}
@@ -39,29 +39,29 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{% url 'projects' %}">Projects</a>
                     </li>
+                    <li>
+                        <div id="content-container" data-theme="dark">
+                            <button id="toggle-dark-mode">Toggle Dark Mode</button>
+                        </div>    
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
-    
-    <div id="content-container" data-theme="dark">
-        <button id="toggle-dark-mode">Toggle Dark Mode</button>
-        
         {% block content %}
         {% endblock %}
-    </div>
+    
 
     <script>
         const toggleButton = document.getElementById('toggle-dark-mode');
         const contentContainer = document.getElementById('content-container');
     
         toggleButton.addEventListener('click', () => {
-            alert(contentContainer.getAttribute('data-theme'));
-            const currentTheme = contentContainer.getAttribute('data-theme');
+            const currentTheme = contentContainer.getAttribute('data-bs-theme');
             const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
     
             // Set the new theme
-            contentContainer.setAttribute('data-theme', newTheme);
+            contentContainer.setAttribute('data-bs-theme', newTheme);
     
             // Save the user's preference in a cookie
             document.cookie = `dark_mode=${newTheme}; expires=Fri, 31 Dec 9999 23:59:59 GMT`;
